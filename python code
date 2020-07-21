@@ -1,0 +1,16 @@
+invoice_workbook = 'OINV.xlsx'
+lineitem_workbook = 'INV1.xlsx'
+output_workbook = 'invoice.xlsx'
+
+df_invoice = pd.read_excel(invoice_workbook)
+df_lineitem = pd.read_excel(lineitem_workbook)
+
+# print(df_invoice.columns)
+# print(df_lineitem.columns)
+
+#rename column DocEntry so they are unique to each workbook
+
+df_invoice.rename(columns={'DocEntry':'Code'}, inplace = True)
+
+df_3 = pd.merge(df_invoice, df_lineitem[['code', 'DocEntry']], on= 'code', how = 'left')
+print(df_3)
